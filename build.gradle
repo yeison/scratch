@@ -41,7 +41,7 @@ artifactory {
 }
 
 group 'dev.yeison'
-version '1.0.1-SNAPSHOT'
+version '2.0.1-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'maven-publish'
