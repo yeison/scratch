@@ -29,6 +29,8 @@ artifactory {
 
             // Publish generated POM files to Artifactory (true by default)
             publishPom = true
+
+            properties = ['qa.level': 'basic', 'dev.team': 'core']
         }
     }
 
@@ -41,7 +43,6 @@ artifactory {
 }
 
 group 'dev.yeison'
-version currentVersion
 
 apply plugin: 'java'
 apply plugin: 'maven-publish'
