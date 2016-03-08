@@ -31,6 +31,12 @@ artifactory {
             publishPom = true
 
             properties = ['qa.level': 'basic', 'dev.team': 'core']
+
+            properties {                                                   //Optional closure to attach properties to artifacts based on a list of artifact patterns per project publication
+                mavenJava 'org.jfrog:*:*:*@*', key1: 'val1'                //The property key1=val1 will be set on all artifacts part of the mavenJava publication and with group org.jfrog
+                all 'org.jfrog:shared:1.?:*@*', key2: 'val2', key3: 'val3' //The properties key2 and key3 will be set on all published artifacts (all publications) with group:artifact:version
+                //equal to org.jfrog:shared:1.?
+            }
         }
     }
 
@@ -43,6 +49,7 @@ artifactory {
 }
 
 group 'dev.yeison'
+version '1.0'
 
 apply plugin: 'java'
 apply plugin: 'maven-publish'
