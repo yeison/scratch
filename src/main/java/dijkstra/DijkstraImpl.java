@@ -28,7 +28,13 @@ public class DijkstraImpl {
     }
 
 
+
     public int getShortestPath(Node a, Node b){
+
+        // b is already in the set then return computed score
+        if(X.get(b.index-1)){
+            return b.greedyScore;
+        }
 
         // start with the first vertex in the set of known vertexes
         X.set(0);
@@ -51,6 +57,7 @@ public class DijkstraImpl {
             */
 
             Node next = heap.remove();
+            heapSet.clear(next.index-1);
 
             X.set(next.index-1);
 
@@ -59,6 +66,7 @@ public class DijkstraImpl {
             last = next;
         }
 
+        X.set(b.index-1);
         return b.greedyScore;
 
     }

@@ -72,6 +72,15 @@ public class DijkstraImplTest {
         int result = di.getShortestPath(nodes.get(0), nodes.get(4));
 
         Assert.assertEquals(2, result);
+
+        result = di.getShortestPath(nodes.get(0), nodes.get(1));
+
+        Assert.assertEquals(3, result);
+
+        result = di.getShortestPath(nodes.get(0), nodes.get(2));
+
+        Assert.assertEquals(2, result);
+
     }
 
 }
