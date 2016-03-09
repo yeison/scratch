@@ -56,7 +56,13 @@ public class DijkstraImpl {
             *  added vertex.
             */
 
-            Node next = heap.remove();
+            Node next = heap.poll();
+
+            if(next == null){
+                // no more edges to follow, done
+                break;
+            }
+
             heapSet.clear(next.index-1);
 
             X.set(next.index-1);

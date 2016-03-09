@@ -83,4 +83,15 @@ public class DijkstraImplTest {
 
     }
 
+    @Test
+    public void testGetNoPath() throws IOException {
+        ArrayList<Node> nodes = DijkstraProblem.readFile("dijkstraTestData6Node.txt");
+
+        DijkstraImpl di = new DijkstraImpl(nodes);
+
+        int result = di.getShortestPath(nodes.get(0), nodes.get(5));
+
+        Assert.assertEquals(Node.NO_PATH, result);
+    }
+
 }

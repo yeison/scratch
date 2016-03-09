@@ -4,8 +4,10 @@ import net.openhft.koloboke.collect.map.IntIntMap;
 import net.openhft.koloboke.collect.map.hash.HashIntIntMaps;
 
 public class Node implements Comparable<Node> {
+    public static final int NO_PATH = 1_000_000;
+
     IntIntMap edges = HashIntIntMaps.newMutableMap();
-    int greedyScore = 1_000_000;
+    int greedyScore = NO_PATH;
 
     public final int index;
 
