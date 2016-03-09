@@ -36,6 +36,7 @@ public class BFS {
 
                 if( ! nodes[v].visited ){
                     nodes[v].distance = n.distance + 1;
+                    nodes[v].visited = true;
                     q.add(nodes[v]);
                 }
             }
