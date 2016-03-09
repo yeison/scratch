@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.BitSet;
 
 /**
@@ -23,17 +24,19 @@ public class DijkstraProblem {
 
     public static void main(String[] args){
 
-        try {
+        int[] problemSet = new int[]{7,37,59,82,99,115,133,165,188,197};
+        int[] solutionSet = new int[problemSet.length];
 
-            //ArrayList<Node> nodes = readFile("dijkstraData.txt");
-            ArrayList<Node> nodes = readFile("dijkstraTestData.txt");
+        try {
+            ArrayList<Node> nodes = readFile("dijkstraData.txt");
 
             DijkstraImpl di = new DijkstraImpl(nodes);
 
-            for(Node n : nodes){
-                di.getShortestPath(nodes.get(0), n);
+            for (int i = 0; i < problemSet.length; i++) {
+                solutionSet[i] = di.getShortestPath(nodes.get(0), nodes.get(problemSet[i]-1));
             }
 
+            System.out.println(Arrays.toString(solutionSet));
 
         } catch (java.io.IOException e) {
             e.printStackTrace();
