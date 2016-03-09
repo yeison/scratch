@@ -30,4 +30,26 @@ public class DijkstraImplTest {
         Assert.assertEquals(3, result);
     }
 
+    @Test
+    public void testGetSimplePath3() throws IOException {
+        ArrayList<Node> nodes = DijkstraProblem.readFile("dijkstraTestData4Node.txt");
+
+        DijkstraImpl di = new DijkstraImpl(nodes);
+
+        int result = di.getShortestPath(nodes.get(0), nodes.get(3));
+
+        Assert.assertEquals(9, result);
+    }
+
+    @Test
+    public void testGetSimplePath4() throws IOException {
+        ArrayList<Node> nodes = DijkstraProblem.readFile("dijkstraTestData5Node.txt");
+
+        DijkstraImpl di = new DijkstraImpl(nodes);
+
+        int result = di.getShortestPath(nodes.get(0), nodes.get(4));
+
+        Assert.assertEquals(10, result);
+    }
+
 }
