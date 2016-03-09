@@ -52,4 +52,15 @@ public class DijkstraImplTest {
         Assert.assertEquals(10, result);
     }
 
+    @Test
+    public void testGetSimplePath5() throws IOException {
+        ArrayList<Node> nodes = DijkstraProblem.readFile("dijkstraTestData5Node2.txt");
+
+        DijkstraImpl di = new DijkstraImpl(nodes);
+
+        int result = di.getShortestPath(nodes.get(0), nodes.get(4));
+
+        Assert.assertEquals(2, result);
+    }
+
 }
