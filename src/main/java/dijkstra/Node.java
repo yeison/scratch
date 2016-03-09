@@ -1,19 +1,30 @@
 package dijkstra;
 
-import net.openhft.koloboke.collect.map.hash.HashIntIntMap;
+import net.openhft.koloboke.collect.map.IntIntMap;
 import net.openhft.koloboke.collect.map.hash.HashIntIntMaps;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 public class Node implements Comparable<Node> {
-    Map<Integer, Integer> edges = HashIntIntMaps.newMutableMap();
-    int pathScore = Integer.MAX_VALUE;
+    IntIntMap edges = HashIntIntMaps.newMutableMap();
+    int greedyScore = Integer.MAX_VALUE;
+
+    public final int index;
+
+    public Node(int index) {
+        this.index = index;
+    }
 
     @Override
     public int compareTo(Node o) {
-        //TODO
-        return 0;
+        return greedyScore - o.greedyScore;
+    }
+
+    /**
+     * Returns true if this node is adjacent to the node i
+     *
+     * @param i - the value of the node that is being checked for adjacency
+     * @return
+     */
+    public boolean isAdjacentTo(int i){
+        return edges.get(i) != edges.defaultValue();
     }
 }

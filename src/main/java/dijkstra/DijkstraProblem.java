@@ -2,6 +2,7 @@ package dijkstra;
 
 import com.google.common.collect.MinMaxPriorityQueue;
 import com.google.common.io.LineReader;
+import net.openhft.koloboke.collect.map.IntIntCursor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,8 +11,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.BitSet;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by yeison on 3/8/16.
@@ -21,38 +20,23 @@ public class DijkstraProblem {
     private static final Logger LOG = LoggerFactory.getLogger(DijkstraProblem.class);
 
     public static final int DEFAULT_SIZE = 200;
-    public static final int NO_PATH = 1_000_000;
-
-    private static MinMaxPriorityQueue<Node> heap = MinMaxPriorityQueue.expectedSize(DEFAULT_SIZE).create();
 
     public static void main(String[] args){
 
-        ArrayList<Node> nodes = null;
-
         try {
 
-            nodes = readFile("dijkstraData.txt");
+            ArrayList<Node> nodes = readFile("dijkstraData.txt");
 
-            // initialize
-            BitSet explored = new BitSet(DEFAULT_SIZE);
+            DijkstraImpl di = new DijkstraImpl(nodes);
 
-            nodes.get(0).pathScore = 0;
-
-            for (int i = 0; i < nodes.size(); i++) {
-                // if i has not been explored perform dijkstra's sssp on i
-                if( ! explored.get(i) ){
-                    Node n = nodes.get(i);
-
-
-
-                    explored.set(i);
-                }
+            for(Node n : nodes){
+                di.getShortestPath(nodes.get(0), n);
             }
+
 
         } catch (java.io.IOException e) {
             e.printStackTrace();
         }
-
 
     }
 
@@ -74,7 +58,7 @@ public class DijkstraProblem {
                 System.exit(1);
             }
 
-            Node node = new Node();
+            Node node = new Node(readEdgeNumber);
 
             for (int i = 1; i < edges.length; i++) {
 
