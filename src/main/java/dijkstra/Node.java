@@ -5,7 +5,7 @@ import net.openhft.koloboke.collect.map.hash.HashIntIntMaps;
 
 public class Node implements Comparable<Node> {
     IntIntMap edges = HashIntIntMaps.newMutableMap();
-    int greedyScore = Integer.MAX_VALUE;
+    int greedyScore = 1_000_000;
 
     public final int index;
 

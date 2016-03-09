@@ -25,7 +25,8 @@ public class DijkstraProblem {
 
         try {
 
-            ArrayList<Node> nodes = readFile("dijkstraData.txt");
+            //ArrayList<Node> nodes = readFile("dijkstraData.txt");
+            ArrayList<Node> nodes = readFile("dijkstraTestData.txt");
 
             DijkstraImpl di = new DijkstraImpl(nodes);
 
@@ -64,8 +65,10 @@ public class DijkstraProblem {
 
                 String[] tuple = edges[i].split(",");
 
-                // place edge details in edge map
-                node.edges.put(Integer.valueOf(tuple[0]), Integer.valueOf(tuple[1]));
+                if(tuple.length == 2) {
+                    // place edge details in edge map
+                    node.edges.put(Integer.valueOf(tuple[0]), Integer.valueOf(tuple[1]));
+                }
 
             }
 

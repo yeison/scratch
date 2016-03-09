@@ -16,7 +16,6 @@ public class DijkstraImpl {
     private static final Logger LOG = LoggerFactory.getLogger(DijkstraProblem.class);
 
     public static final int DEFAULT_SIZE = 200;
-    public static final int NO_PATH = 1_000_000;
 
     private final PriorityQueue<Node> heap = new PriorityQueue<>(DEFAULT_SIZE);
 
@@ -29,15 +28,15 @@ public class DijkstraImpl {
     }
 
 
-    public void getShortestPath(Node a, Node b){
+    public int getShortestPath(Node a, Node b){
 
         // start with the first vertex in the set of known vertexes
         X.set(0);
 
         // explore edges of said vertex
         Node n = nodes.get(0);
+        n.greedyScore = 0;
         edgeExplore(n);
-
 
         Node last = n;
 
@@ -53,12 +52,14 @@ public class DijkstraImpl {
 
             Node next = heap.remove();
 
-            X.set(next.index);
+            X.set(next.index-1);
 
             edgeExplore(next);
 
             last = next;
         }
+
+        return b.greedyScore;
 
     }
 
@@ -67,9 +68,10 @@ public class DijkstraImpl {
      * Computes potential greedy scores and adds crossing edges to the heap
      * @param node
      */
-    public void edgeExplore(Node node){
-        for(IntIntCursor vertexCursor = node.edges.cursor(); vertexCursor != null; vertexCursor.moveNext()){
-            int vertexIndex = vertexCursor.key();
+    private void edgeExplore(Node node){
+        for(IntIntCursor vertexCursor = node.edges.cursor(); vertexCursor.moveNext(); ){
+
+            int vertexIndex = vertexCursor.key()-1;
 
             // not a crossing edge if vertex is already in X, so skip
             if(X.get(vertexIndex)){
