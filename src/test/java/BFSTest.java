@@ -134,4 +134,11 @@ public class BFSTest {
 
         Assert.assertEquals(Integer.MAX_VALUE, result);
     }
+
+    @Test
+    public void testPrintBFSOrder() throws IOException {
+        Node[] nodes = BFS.readFile("BFSTestData5").toArray(new Node[0]);
+
+        BFS.printBFSOrder(nodes, 0);
+    }
 }

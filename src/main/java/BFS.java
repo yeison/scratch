@@ -11,9 +11,10 @@ import java.util.*;
 public class BFS {
     private static Random R = new Random();
 
-    public static void main(String[] args){
-        //getShortestPath(0, 3);
-    }
+    public static void main(String[] args) throws IOException {
+        Node[] nodes = BFS.readFile("BFSTestData5").toArray(new Node[0]);
+
+        BFS.printBFSOrder(nodes, 0);    }
 
     /**
      * Starting from Node at index s find the node at index t
@@ -43,6 +44,56 @@ public class BFS {
         }
 
         return nodes[t].distance;
+    }
+
+    public static void printBFSOrder(Node[] G, int s){
+        List<List<Node>> bfsList = new ArrayList<>();
+        Queue<Node> q = new LinkedList<>();
+
+        Node G_s = G[s];
+        G_s.distance = 0;
+        G_s.visited = true;
+        q.add(G_s);
+        getOrCreateList(0, bfsList).add(G_s);
+
+        while(!q.isEmpty()){
+            Node n = q.remove();
+
+            for(int v : n.edges.stream().toArray()){
+                Node G_v = G[v];
+                if(!G_v.visited){
+                    G_v.distance = n.distance + 1;
+                    G_v.visited = true;
+                    q.add(G_v);
+                    getOrCreateList(G_v.distance, bfsList).add(G_v);
+                }
+            }
+        }
+
+        // completed graph traversal now sort and print
+        for(List<Node> l : bfsList){
+            Collections.sort(l);
+
+            for(Node n : l){
+                System.out.println(n.name);
+            }
+        }
+
+    }
+
+    private static List<Node> getOrCreateList(int i, List<List<Node>> bfsList) {
+        List<Node> result = null;
+
+        if(bfsList.size() > i){
+            result = bfsList.get(i);
+        }
+
+        if(result == null){
+            result = new ArrayList<>();
+            bfsList.add(result);
+        }
+
+        return result;
     }
 
     /**
