@@ -27,11 +27,13 @@ public class Card implements Comparable<Card>{
         this.valuesByDimension = Arrays.copyOf(valuesByDimension, valuesByDimension.length);
     }
 
-    public static Card newCard(int[] valuesByDimension, List<Dimension> dimensions){
+    /**
+     * Create a Card, with the dimension values specified in valuesByDimension
+     * @param valuesByDimension For each dimension (e.g. 0,1,2,3 ... etc) specify a value
+     * @return a newly created card
+     */
+    public static Card newCard(int[] valuesByDimension){
         Card c = new Card(valuesByDimension);
-
-        c.setDimensions(dimensions);
-
         return c;
     }
 
@@ -101,7 +103,7 @@ public class Card implements Comparable<Card>{
      * Creates a defensive copy of dims
      *
      */
-    public void setDimensions(List<Dimension> dims){
+    public static void setDimensions(List<Dimension> dims){
         List<Dimension> dimsCopy = new ArrayList<>(dims);
 
         // sort by Dimensions.getOrdinal()

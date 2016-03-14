@@ -32,17 +32,8 @@ public class SetSolver {
      *
      */
 
-    private static ArrayList<Dimension> dimensions;
 
     public static void main(String[] args){
-        int dims = 4, values = 4;
-
-        dimensions = new ArrayList<>(dims);
-
-        for (int i = 0; i < dims; i++) {
-            dimensions.add(new Dimension(i, values));
-        }
-
 
         ArrayList<Card> cards = new ArrayList<>();
 
@@ -52,20 +43,35 @@ public class SetSolver {
         int[] valuesByDimension4 = new int[]{3,3,3,3};
 
 
-        cards.add(newCard(valuesByDimension1, dimensions));
-        cards.add(newCard(valuesByDimension2, dimensions));
-        cards.add(newCard(valuesByDimension3, dimensions));
-        cards.add(newCard(valuesByDimension4, dimensions));
+        cards.add(newCard(valuesByDimension1));
+        cards.add(newCard(valuesByDimension2));
+        cards.add(newCard(valuesByDimension3));
+        cards.add(newCard(valuesByDimension4));
 
 
-
-        Set<CardSet> possibleSets = getPossibleSets(cards);
+        Set<CardSet> possibleSets = getPossibleSets(cards, 4, 4);
 
         System.out.println();
     }
 
+    /**
+     * Compute the sets that are possible for the given input cards and the specified dimension and value sizes
+     */
+    public static Set<CardSet> getPossibleSets(ArrayList<Card> cards, int dimensionSize, int valuesSize){
+        ArrayList<Dimension> dimensions = new ArrayList<>(dimensionSize);
 
-    public static Set<CardSet> getPossibleSets(ArrayList<Card> cards){
+        for (int i = 0; i < dimensionSize; i++) {
+            dimensions.add(new Dimension(i, valuesSize));
+        }
+
+        Card.setDimensions(dimensions);
+
+        return getPossibleSets(cards);
+
+    }
+
+
+    private static Set<CardSet> getPossibleSets(ArrayList<Card> cards){
         Set<CardSet> result = new HashSet<>();
 
         // map each card to its frequency
@@ -172,7 +178,7 @@ public class SetSolver {
     private static void generateThirdCards(List<List<Integer>> validValues, int dimension, int[] valuesByDimension, ArrayList<Card> validCards) {
         // base case - all values are set, now generate the valid card
         if(dimension == valuesByDimension.length){
-            validCards.add(newCard(valuesByDimension, dimensions));
+            validCards.add(newCard(valuesByDimension));
             return;
         }
 
