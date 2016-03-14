@@ -214,6 +214,81 @@ public class SetSolverTest {
         Assert.assertEquals(13, possibleSets.size());
     }
 
+    @Test
+    public void testComplex3Cards1(){
+        ArrayList<Card> cards = new ArrayList<>();
 
+        cards.add(newCard(new int[]{0,1,0,1}));
+        cards.add(newCard(new int[]{1,2,1,2}));
+        cards.add(newCard(new int[]{2,3,2,3}));
+
+        Set<CardSet> possibleSets = getPossibleSets(cards, 4, 5);
+
+        Assert.assertEquals(1, possibleSets.size());
+    }
+
+    @Test
+    public void testComplex3CardsWithRepeats1(){
+        ArrayList<Card> cards = new ArrayList<>();
+
+        cards.add(newCard(new int[]{0,1,0,1}));
+        cards.add(newCard(new int[]{0,1,0,1}));
+        cards.add(newCard(new int[]{1,2,1,2}));
+        cards.add(newCard(new int[]{2,3,2,3}));
+
+
+        Set<CardSet> possibleSets = getPossibleSets(cards, 4, 5);
+
+        Assert.assertEquals(1, possibleSets.size());
+    }
+
+    @Test
+    public void testComplex3CardsWithRepeats2(){
+        ArrayList<Card> cards = new ArrayList<>();
+
+        cards.add(newCard(new int[]{0,1,0,1}));
+        cards.add(newCard(new int[]{0,1,0,1}));
+        cards.add(newCard(new int[]{0,1,0,1}));
+        cards.add(newCard(new int[]{1,2,1,2}));
+        cards.add(newCard(new int[]{2,3,2,3}));
+
+
+        Set<CardSet> possibleSets = getPossibleSets(cards, 4, 5);
+
+        Assert.assertEquals(2, possibleSets.size());
+    }
+
+    @Test
+    public void testComplex4Cards1(){
+        ArrayList<Card> cards = new ArrayList<>();
+
+        cards.add(newCard(new int[]{0,1,0,1}));
+        cards.add(newCard(new int[]{1,2,1,2}));
+        cards.add(newCard(new int[]{2,3,2,3}));
+        cards.add(newCard(new int[]{3,4,3,4}));
+
+
+        Set<CardSet> possibleSets = getPossibleSets(cards, 4, 5);
+
+        // (4 choose 3) = 4
+        Assert.assertEquals(4, possibleSets.size());
+    }
+
+    @Test
+    public void testComplex5Cards1(){
+        ArrayList<Card> cards = new ArrayList<>();
+
+        cards.add(newCard(new int[]{0,1,0,1}));
+        cards.add(newCard(new int[]{1,2,1,2}));
+        cards.add(newCard(new int[]{2,3,2,3}));
+        cards.add(newCard(new int[]{3,4,3,4}));
+        cards.add(newCard(new int[]{4,5,4,5}));
+
+
+        Set<CardSet> possibleSets = getPossibleSets(cards, 4, 6);
+
+        // (5 choose 3) = 10
+        Assert.assertEquals(10, possibleSets.size());
+    }
 
 }
